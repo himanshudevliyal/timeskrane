@@ -1,0 +1,52 @@
+"use client";
+
+import { CheckCircle } from "lucide-react";
+
+const allSections = [
+  {
+    label: "Three variants to choose from",
+    points: [
+      "EVP-KBK single-girder full-portal crane — available with KBK II or KBK II-H crane girder",
+      "ZVP-KBK double-girder full-portal crane — available with KBK II or KBK II-H crane girders",
+      "D-IVP single-girder full-portal crane — features an I-beam section crane girder with optional telescopic height adjustment",
+    ],
+  },
+  {
+    label: "Built for real-world use",
+    points: [
+      "Easy to manoeuvre in any direction",
+      "Dismantles quickly and simply for hassle-free transport",
+      "Can be set up again at a new location in no time",
+    ],
+  },
+];
+export default function ProductInformation() {
+  return (
+    <section className=" w-full">
+      <div className="container  mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {allSections.map((section, index) => (
+            <div
+              key={index}
+              className="border rounded-lg shadow-sm bg-white overflow-hidden"
+            >
+              <div className="p-6">
+                <h4 className="text-xl font-bold my-4 text-[#676f77]">
+                  {section.label}
+                </h4>
+                <ul className="space-y-4">
+                  {section.points.map((point, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm md:text-base">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
