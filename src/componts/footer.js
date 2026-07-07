@@ -141,8 +141,17 @@ export default function Footer() {
 
               <p className="text-sm">+91 9810901759</p>
 
-              <p className="text-sm"> Marketing@timesmarketing.com</p>
-              <p className="text-sm">gauravmehta@timesmarketing.com</p>
+              <p className="text-sm">
+                <a href="mailto:Marketing@timesmarketing.com">
+                  Marketing@timesmarketing.com
+                </a>
+              </p>
+
+              <p className="text-sm">
+                <a href="mailto:gauravmehta@timesmarketing.com">
+                  gauravmehta@timesmarketing.com
+                </a>
+              </p>
             </div>
           </div>
 
