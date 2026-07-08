@@ -14,8 +14,44 @@ export async function POST(request) {
       email,
       telephone,
       country,
+      captchaToken,
     } = data;
 
+    // Check captcha token
+    if (!captchaToken) {
+      return Response.json(
+        { error: "Captcha token is missing." },
+        { status: 400 },
+      );
+    }
+
+    // Verify Google reCAPTCHA
+    const captchaResponse = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          secret: process.env.RECAPTCHA_SECRET_KEY,
+          response: captchaToken,
+        }),
+      },
+    );
+
+    const captchaResult = await captchaResponse.json();
+
+    if (!captchaResult.success) {
+      return Response.json(
+        {
+          error: "Captcha verification failed.",
+        },
+        { status: 400 },
+      );
+    }
+
+    // Email Transporter
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -26,28 +62,78 @@ export async function POST(request) {
       },
     });
 
+    // Send Email
     await transporter.sendMail({
       from: `"Website Form" <${process.env.EMAIL_USERNAME}>`,
       to: process.env.EMAIL_USERNAME,
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
-        <h3>Contact Form Details</h3>
-        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-        <p><strong>Company:</strong> ${company}</p>
-        <p><strong>Street:</strong> ${street}</p>
-        <p><strong>ZIP:</strong> ${zipCode}</p>
-        <p><strong>Town/City:</strong> ${townCity}</p>
-        <p><strong>Country:</strong> ${country}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Telephone:</strong> ${telephone}</p>
+        <h2>New Contact Form Submission</h2>
+
+        <table border="1" cellpadding="10" cellspacing="0">
+          <tr>
+            <td><strong>First Name</strong></td>
+            <td>${firstName}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Last Name</strong></td>
+            <td>${lastName}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Company</strong></td>
+            <td>${company}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Street</strong></td>
+            <td>${street}</td>
+          </tr>
+
+          <tr>
+            <td><strong>ZIP Code</strong></td>
+            <td>${zipCode}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Town / City</strong></td>
+            <td>${townCity}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Country</strong></td>
+            <td>${country}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Email</strong></td>
+            <td>${email}</td>
+          </tr>
+
+          <tr>
+            <td><strong>Telephone</strong></td>
+            <td>${telephone}</td>
+          </tr>
+        </table>
       `,
     });
 
-    return new Response(JSON.stringify({ success: true }), { status: 200 });
-  } catch (error) {
-    console.error("Failed to send email:", error);
-    return new Response(JSON.stringify({ error: "Failed to send email" }), {
-      status: 500,
+    return Response.json({
+      success: true,
+      message: "Email sent successfully.",
     });
+  } catch (error) {
+    console.error(error);
+
+    return Response.json(
+      {
+        success: false,
+        error: "Failed to send email.",
+      },
+      {
+        status: 500,
+      },
+    );
   }
 }

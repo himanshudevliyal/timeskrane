@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { FiChevronRight } from "react-icons/fi";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,8 @@ const ContactForm = () => {
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const [captchaError, setCaptchaError] = useState("");
 
   const validateField = (name, value) => {
     if (name === "termsAccepted" && !value) {
@@ -42,18 +45,31 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const newErrors = {};
+
     Object.entries(formData).forEach(([key, value]) => {
       const error = validateField(key, value);
       if (error) newErrors[key] = error;
     });
 
-    if (Object.keys(newErrors).length === 0) {
+    if (!captchaToken) {
+      setCaptchaError("Please verify that you are not a robot.");
+    } else {
+      setCaptchaError("");
+    }
+
+    if (Object.keys(newErrors).length === 0 && captchaToken) {
       try {
         const res = await fetch("/api/email/send", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...formData,
+            captchaToken,
+          }),
         });
 
         if (res.ok) {
@@ -62,8 +78,8 @@ const ContactForm = () => {
           alert("Email sending failed. Try again.");
         }
       } catch (error) {
-        console.error("Submit error:", error);
-        alert("Something went wrong. Please try again later.");
+        console.error(error);
+        alert("Something went wrong. Please try again.");
       }
     } else {
       setErrors(newErrors);
@@ -134,8 +150,8 @@ const ContactForm = () => {
                       field === "email"
                         ? "email"
                         : field === "telephone"
-                        ? "tel"
-                        : "text"
+                          ? "tel"
+                          : "text"
                     }
                     id={field}
                     name={field}
@@ -191,10 +207,28 @@ const ContactForm = () => {
             </div>
 
             <div className="mt-6">
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                onChange={(token) => {
+                  setCaptchaToken(token);
+                  setCaptchaError("");
+                }}
+                onExpired={() => {
+                  setCaptchaToken(null);
+                }}
+              />
+
+              {captchaError && (
+                <p className="text-red-500 text-sm mt-2">{captchaError}</p>
+              )}
+            </div>
+
+            <div className="mt-6">
               <button type="submit" className="flex mt-4 items-center">
                 <span className="bg-blue-700 hover:bg-blue-800 text-white font-bold px-4 py-2 rounded-l">
                   Submit
                 </span>
+
                 <span className="bg-blue-500 text-white px-2 py-2 rounded-r">
                   <FiChevronRight className="text-2xl" />
                 </span>
