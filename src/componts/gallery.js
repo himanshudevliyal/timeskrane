@@ -4,24 +4,22 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { Fancybox } from "@fancyapps/ui";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import Navbar from "@/componts/nav";
-import Footer from "@/componts/footer";
-import { Breadcrumb } from "@/componts/breadcrumb";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Container from "@mui/material/Container";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-const images = [
-  { id: 1, src: "/img/gallery/1.jpeg", alt: "Image 1" },
-  { id: 10, src: "/img/gallery/10.jpeg", alt: "Image 10" },
+export const images = [
+  { id: 53, src: "/img/gallery/53.jpeg", alt: "Image 53" },
+  { id: 41, src: "/img/gallery/41.jpeg", alt: "Image 41" },
+  { id: 52, src: "/img/gallery/52.jpeg", alt: "Image 52" },
+  { id: 29, src: "/img/gallery/29.jpeg", alt: "Image 29" },
+  { id: 20, src: "/img/gallery/20.jpeg", alt: "Image17" },
+  { id: 55, src: "/img/gallery/55.jpeg", alt: "Image 55" },
   { id: 12, src: "/img/gallery/12.jpeg", alt: "Image 12" },
-  { id: 15, src: "/img/gallery/15.jpeg", alt: "Image 15" },
-  { id: 17, src: "/img/gallery/17.jpeg", alt: "Image 14" },
-  { id: 18, src: "/img/gallery/18.jpeg", alt: "Image 15" },
-  { id: 19, src: "/img/gallery/19.jpeg", alt: "Image 16" },
-  { id: 20, src: "/img/gallery/20.jpeg", alt: "Image 17" },
+  { id: 54, src: "/img/gallery/54.jpeg", alt: "Image 54" },
 ];
 export default function GridGallery() {
   const sliderRef = useRef(null);
