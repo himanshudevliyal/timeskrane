@@ -46,7 +46,7 @@ export async function generateMetadata({ params }) {
     description: data?.meta_description,
     keywords: data?.meta_keywords,
     alternates: {
-      canonical: `https://www.timeskrane.com/blogs/${data?.slug}`,
+      canonical: `https://www.timeskrane.com/blog/${data?.slug}`,
     },
     openGraph: {
       title: data?.meta_title ?? data?.title,
