@@ -70,7 +70,7 @@ export default function GetInTouch() {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("/model/form/sand", {
+      const res = await fetch("/api/model/form/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

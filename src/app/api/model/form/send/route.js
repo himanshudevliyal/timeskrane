@@ -33,7 +33,7 @@ export async function POST(req) {
     console.error("Email error:", err);
     return NextResponse.json(
       { error: "Failed to send email." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
