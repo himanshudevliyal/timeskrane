@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -23,6 +24,16 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/eot-crane-manufacturer-in-delhi-ncr",
+        destination: "/crane/eot-crane-manufacturer-in-delhi-ncr",
+        permanent: true,
+      },
+    ];
   },
 };
 

@@ -43,51 +43,51 @@ export default async function sitemap() {
   const staticPages = [
     "",
 
-    "/contact",
-    "/about",
-    "/blog",
-    "/gallery",
+    "contact",
+    "about",
+    "blog",
+    "gallery",
 
     // EOT CRANES
-    "/eot-cranes",
-    "/eot-cranes/underslung-crane",
-    "/eot-cranes/single-girder-crane",
-    "/eot-cranes/double-girder-crane",
-    "/eot-cranes/jib-crane",
+    "eot-cranes",
+    "eot-cranes/underslung-crane",
+    "eot-cranes/single-girder-crane",
+    "eot-cranes/double-girder-crane",
+    "eot-cranes/jib-crane",
 
     // KBK
-    "/kbk-light-crane-system",
-    "/kbk-aluline",
-    "/kbk-single-girder-suspension-cranes",
-    "/kbk-double-girder-suspension-cranes",
-    "/kbk-overhung-and-extending-cranes",
-    "/kbk-cranes-manipulators",
-    "/kbk-suspension-monorails",
-    "/kbk-stacker-cranes",
-    "/kbk-portal-cranes",
+    "kbk-light-crane-system",
+    "kbk-aluline",
+    "kbk-single-girder-suspension-cranes",
+    "kbk-double-girder-suspension-cranes",
+    "kbk-overhung-and-extending-cranes",
+    "kbk-cranes-manipulators",
+    "kbk-suspension-monorails",
+    "kbk-stacker-cranes",
+    "kbk-portal-cranes",
 
     // ROPE HOISTS
-    "/rope-hoists",
-    "/dhr-rope-hoist",
-    "/dvr-rope-hoist",
-    "/dh-hoist-units",
+    "rope-hoists",
+    "dhr-rope-hoist",
+    "dvr-rope-hoist",
+    "dh-hoist-units",
 
     // CHAIN HOISTS
-    "/chain-hoists",
-    "/chain-hoists/dc-pro-chain-hoist",
-    "/chain-hoists/dcs-pro-chain-hoist",
-    "/chain-hoists/dcm-pro-manulift",
-    "/chain-hoists/dc-com-chain-hoist",
-    "/chain-hoists/dcms-pro-manulift",
-    "/chain-hoists/dcbs-chain-hoist",
-    "/chain-hoists/dc-ii-chain-hoist",
-    "/chain-hoists/dc-wind-chain-hoist",
-    "/chain-hoists/ldc-d-and-kldc-d-double-chain-hoists",
-    "/chain-hoists/chain-hoist-kdc-low-headroom-travelling-hoist",
-    "/chain-hoists/kldc-traveling-hoist-big-bags",
-    "/chain-hoists/ldc-q-quadro-chain-hoist",
-    "/chain-hoists/trolleys-dc-chain-hoists",
-    "/chain-hoists/ddc-articulated-trolley",
+    "chain-hoists",
+    "chain-hoists/dc-pro-chain-hoist",
+    "chain-hoists/dcs-pro-chain-hoist",
+    "chain-hoists/dcm-pro-manulift",
+    "chain-hoists/dc-com-chain-hoist",
+    "chain-hoists/dcms-pro-manulift",
+    "chain-hoists/dcbs-chain-hoist",
+    "chain-hoists/dc-ii-chain-hoist",
+    "chain-hoists/dc-wind-chain-hoist",
+    "chain-hoists/ldc-d-and-kldc-d-double-chain-hoists",
+    "chain-hoists/chain-hoist-kdc-low-headroom-travelling-hoist",
+    "chain-hoists/kldc-traveling-hoist-big-bags",
+    "chain-hoists/ldc-q-quadro-chain-hoist",
+    "chain-hoists/trolleys-dc-chain-hoists",
+    "chain-hoists/ddc-articulated-trolley",
   ];
 
   // STATIC URLS
@@ -100,7 +100,7 @@ export default async function sitemap() {
 
   // BLOG URLS
   const blogUrls = blogs.map((blog) => ({
-    url: `${BASE_URL}/blog/${blog.slug}`,
+    url: `${BASE_URL}blog/${blog.slug}`,
     lastModified: new Date(blog.updated_at || blog.created_at || new Date()),
     changeFrequency: "weekly",
     priority: 0.8,
@@ -108,7 +108,7 @@ export default async function sitemap() {
 
   // CITY BLOG URLS
   const cityUrls = cityBlogs.map((city) => ({
-    url: `${BASE_URL}/${city.slug}`,
+    url: `${BASE_URL}${city.slug}`,
     lastModified: new Date(city.updated_at || city.created_at || new Date()),
     changeFrequency: "weekly",
     priority: 0.7,
