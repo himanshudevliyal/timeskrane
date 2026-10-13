@@ -1,16 +1,17 @@
 export function extractHeadings(htmlContent) {
-  const headingRegex = /<h2[^>]*>(.*?)<\/h2>/g;
+  const headingRegex = /<h([23])[^>]*>(.*?)<\/h\1>/gis;
   const headings = [];
   let match;
 
   while ((match = headingRegex.exec(htmlContent)) !== null) {
-    const text = match[1].replace(/<[^>]*>/g, "");
+    const level = Number(match[1]); // 2 or 3
+    const text = match[2].replace(/<[^>]*>/g, "").trim();
     const id = text
       .toLowerCase()
       .replace(/\s+/g, "-")
       .replace(/[^\w-]/g, "");
 
-    headings.push({ text, id });
+    headings.push({ text, id, level });
   }
 
   return headings;

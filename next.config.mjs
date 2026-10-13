@@ -26,15 +26,20 @@ const nextConfig = {
     ],
   },
 
-  async redirects() {
-    return [
-      {
-        source: "/eot-crane-manufacturer-in-delhi-ncr",
-        destination: "/crane/eot-crane-manufacturer-in-delhi-ncr",
-        permanent: true,
-      },
-    ];
-  },
+async redirects() {
+  return [
+    {
+      source: "/eot-crane-manufacturer-in-delhi-ncr",
+      destination: "/crane/eot-crane-manufacturer-in-delhi-ncr",
+      permanent: true,
+    },
+    {
+      source: "/blogs/:slug",
+      destination: "/blog/:slug",
+      permanent: true,
+    },
+  ];
+},
 };
 
 export default nextConfig;

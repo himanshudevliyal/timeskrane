@@ -10,6 +10,8 @@ async function getBlogs() {
       cache: "no-store",
     });
 
+    if (!res.ok) return [];
+
     const data = await res.json();
 
     return data?.data?.products || [];
@@ -26,6 +28,8 @@ async function getCityBlogs() {
       cache: "no-store",
     });
 
+    if (!res.ok) return [];
+
     const data = await res.json();
 
     return data?.data?.products || [];
@@ -35,9 +39,28 @@ async function getCityBlogs() {
   }
 }
 
+// PRODUCT PAGES API
+async function getProductPages() {
+  try {
+    const res = await fetch(`${API_URL}/product-pages`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) return [];
+
+    const data = await res.json();
+
+    return data?.data?.products || [];
+  } catch (error) {
+    console.log("Product Pages Error:", error);
+    return [];
+  }
+}
+
 export default async function sitemap() {
   const blogs = await getBlogs();
   const cityBlogs = await getCityBlogs();
+  const productPages = await getProductPages();
 
   // STATIC ROUTES
   const staticPages = [
@@ -99,20 +122,46 @@ export default async function sitemap() {
   }));
 
   // BLOG URLS
-  const blogUrls = blogs.map((blog) => ({
-    url: `${BASE_URL}blog/${blog.slug}`,
-    lastModified: new Date(blog.updated_at || blog.created_at || new Date()),
-    changeFrequency: "weekly",
-    priority: 0.8,
-  }));
+  const blogUrls = blogs
+    .filter((blog) => blog.slug)
+    .map((blog) => ({
+      url: `${BASE_URL}blog/${blog.slug}`,
+      lastModified: new Date(
+        blog.updated_at || blog.created_at || new Date()
+      ),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    }));
 
   // CITY BLOG URLS
-  const cityUrls = cityBlogs.map((city) => ({
-    url: `${BASE_URL}${city.slug}`,
-    lastModified: new Date(city.updated_at || city.created_at || new Date()),
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
+  const cityUrls = cityBlogs
+    .filter((city) => city.slug)
+    .map((city) => ({
+      url: `${BASE_URL}${city.slug}`,
+      lastModified: new Date(
+        city.updated_at || city.created_at || new Date()
+      ),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
 
-  return [...staticUrls, ...blogUrls, ...cityUrls];
+  // PRODUCT PAGE URLS
+  const productUrls = productPages
+    .filter((product) => product.slug)
+    .map((product) => ({
+      url: `${BASE_URL}crane/${product.slug}`,
+      lastModified: new Date(
+        product.updated_at || product.created_at || new Date()
+      ),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    }));
+
+  // FINAL SITEMAP
+  return [
+    ...staticUrls,
+    ...blogUrls,
+    ...cityUrls,
+    ...productUrls,
+  ];
 }
