@@ -97,8 +97,16 @@ async redirects() {
       destination: '/crane/eot-crane-manufacturer-in-delhi-ncr',
       permanent: true,
     },
+  { source: '/eot-crane-manufacturer-vapi', destination: '/eot-crane-manufacturer-in-vapi', permanent: true },
+  { source: '/eot-crane-manufacturer-in-maharashtra', destination: '/crane/eot-crane-manufacturer-maharashtra', permanent: true },
+  { source: '/crane-manufacturers-in-maharashtra', destination: '/crane/eot-crane-manufacturer-maharashtra', permanent: true },
+ { source: '/crane-manufacturers-in-maharashtra', destination: '/crane/eot-crane-manufacturer-maharashtra', permanent: true },
+ 
+   { source: '/eot-crane-manufacturer-in-tamilnadu', destination: '/crane/eot-crane-manufacturer-in-tamil-nadu', permanent: true },
 
-    // /blogs/* -> /blog/*
+ 
+ 
+ // /blogs/* -> /blog/*
     {
       source: '/blogs/:slug',
       destination: '/blog/:slug',
