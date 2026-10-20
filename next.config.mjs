@@ -92,11 +92,7 @@ async redirects() {
     { source: '/eot-crane-manufacturer-vapi', destination: '/eot-crane-manufacturer-in-vapi', permanent: true },
 
     // Delhi NCR
-    {
-      source: '/eot-crane-manufacturer-in-delhi-ncr',
-      destination: '/crane/eot-crane-manufacturer-in-delhi-ncr',
-      permanent: true,
-    },
+
   { source: '/eot-crane-manufacturer-vapi', destination: '/eot-crane-manufacturer-in-vapi', permanent: true },
   { source: '/eot-crane-manufacturer-in-maharashtra', destination: '/crane/eot-crane-manufacturer-maharashtra', permanent: true },
   { source: '/crane-manufacturers-in-maharashtra', destination: '/crane/eot-crane-manufacturer-maharashtra', permanent: true },
@@ -111,7 +107,6 @@ async redirects() {
       { source: '/eot-crane-manufacturers-in-gujarat', destination: '/crane/eot-crane-manufacturer-in-gujarat', permanent: true },
 
       // Delhi NCR
-      { source: '/crane/eot-crane-manufacturer-in-delhi-ncr', destination: '/eot-crane-manufacturer-in-delhi-ncr', permanent: true },
       { source: '/eot-crane-manufacturer-in-delhi', destination: '/eot-crane-manufacturer-in-delhi-ncr', permanent: true },
       { source: '/eot-crane-company-in-delhi', destination: '/eot-crane-manufacturer-in-delhi-ncr', permanent: true },
 
@@ -136,7 +131,7 @@ async redirects() {
       { source: '/crane-suppliers-in-chennai', destination: '/eot-crane-manufacturers-in-chennai', permanent: true },
 
       // Karnataka
-      { source: '/eot-crane-manufacturers-in-karnataka', destination: '/crane/eot-crane-manufacturers-in-karnataka', permanent: true },
+      { source: '/eot-crane-manufacturer-in-karnataka', destination: '/crane/eot-crane-manufacturer-in-karnataka', permanent: true },
 
       // Hyderabad
       { source: '/eot-crane-manufacturer-in-hyderabad', destination: '/eot-crane-manufacturers-in-hyderabad', permanent: true },
