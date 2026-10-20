@@ -106,9 +106,7 @@ async redirects() {
    // Gujarat
       { source: '/eot-crane-manufacturers-in-gujarat', destination: '/crane/eot-crane-manufacturer-in-gujarat', permanent: true },
 
-      // Delhi NCR
-      { source: '/eot-crane-manufacturer-in-delhi', destination: '/eot-crane-manufacturer-in-delhi-ncr', permanent: true },
-      { source: '/eot-crane-company-in-delhi', destination: '/eot-crane-manufacturer-in-delhi-ncr', permanent: true },
+      
 
       // Pune - EOT intent
       { source: '/eot-crane-manufacturer-in-pune', destination: '/crane/eot-crane-manufacturers-in-pune', permanent: true },
@@ -156,7 +154,21 @@ async redirects() {
       { source: '/crane/top-eot-crane-manufacturers-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
       { source: '/crane/eot-crane-company-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
 
- 
+ {
+  source: '/eot-crane-manufacturer-in-delhi',
+  destination: '/crane/eot-crane-manufacturer-in-delhi-ncr',
+  permanent: true,
+},
+{
+  source: '/eot-crane-company-in-delhi',
+  destination: '/crane/eot-crane-manufacturer-in-delhi-ncr',
+  permanent: true,
+},
+{
+  source: '/eot-crane-manufacturers-in-faridabad',
+  destination: '/crane/eot-crane-manufacturers-in-faridabad',
+  permanent: true,
+},
  
  // /blogs/* -> /blog/*
     {
