@@ -104,6 +104,63 @@ async redirects() {
  
    { source: '/eot-crane-manufacturer-in-tamilnadu', destination: '/crane/eot-crane-manufacturer-in-tamil-nadu', permanent: true },
 
+
+
+
+   // Gujarat
+      { source: '/eot-crane-manufacturers-in-gujarat', destination: '/crane/eot-crane-manufacturer-in-gujarat', permanent: true },
+
+      // Delhi NCR
+      { source: '/crane/eot-crane-manufacturer-in-delhi-ncr', destination: '/eot-crane-manufacturer-in-delhi-ncr', permanent: true },
+      { source: '/eot-crane-manufacturer-in-delhi', destination: '/eot-crane-manufacturer-in-delhi-ncr', permanent: true },
+      { source: '/eot-crane-company-in-delhi', destination: '/eot-crane-manufacturer-in-delhi-ncr', permanent: true },
+
+      // Pune - EOT intent
+      { source: '/eot-crane-manufacturer-in-pune', destination: '/crane/eot-crane-manufacturers-in-pune', permanent: true },
+      { source: '/eot-crane-in-pune', destination: '/crane/eot-crane-manufacturers-in-pune', permanent: true },
+
+      // Pune - generic intent
+      { source: '/crane-manufacturers-in-pune', destination: '/crane-manufacturing-companies-in-pune', permanent: true },
+      { source: '/overhead-crane-manufacturers-in-pune', destination: '/crane-manufacturing-companies-in-pune', permanent: true },
+
+      // Faridabad
+      { source: '/eot-crane-manufacturers-in-faridabad', destination: '/crane/eot-crane-manufacturers-in-faridabad', permanent: true },
+      { source: '/eot-crane-company-in-faridabad', destination: '/crane/eot-crane-manufacturers-in-faridabad', permanent: true },
+      { source: '/overhead-crane-suppliers-in-faridabad', destination: '/crane/eot-crane-manufacturers-in-faridabad', permanent: true },
+
+      // Ahmedabad
+      { source: '/eot-crane-manufacturers-in-ahmedabad', destination: '/crane-manufacturer-in-ahmedabad', permanent: true },
+      { source: '/overhead-crane-manufacturers-in-ahmedabad', destination: '/crane-manufacturer-in-ahmedabad', permanent: true },
+
+      // Chennai
+      { source: '/crane-suppliers-in-chennai', destination: '/eot-crane-manufacturers-in-chennai', permanent: true },
+
+      // Karnataka
+      { source: '/eot-crane-manufacturers-in-karnataka', destination: '/crane/eot-crane-manufacturers-in-karnataka', permanent: true },
+
+      // Hyderabad
+      { source: '/eot-crane-manufacturer-in-hyderabad', destination: '/eot-crane-manufacturers-in-hyderabad', permanent: true },
+
+      // Ludhiana
+      { source: '/eot-crane-manufacturer-in-ludhiana', destination: '/eot-crane-manufacturers-in-ludhiana', permanent: true },
+
+      // Double girder
+      { source: '/crane/double-girder-eot-crane', destination: '/crane/double-girder-eot-crane-manufacturer', permanent: true },
+      { source: '/crane/double-girder-eot-crane-supplier', destination: '/crane/double-girder-eot-crane-manufacturer', permanent: true },
+
+      // Blog duplicate
+      { source: '/blog/preventive-maintenance-checklist-for-eot-crane-in-2026', destination: '/blog/preventive-maintenance-checklist-for-eot-cranes-in-2026', permanent: true },
+
+      // India
+      { source: '/crane/crane-company-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
+      { source: '/crane/best-eot-crane-manufacturer-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
+      { source: '/crane/crane-manufacturers-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
+      { source: '/crane/crane-suppliers-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
+      { source: '/crane/crane-manufacturing-companies-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
+      { source: '/crane/crane-manufacturing-company-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
+      { source: '/crane/top-eot-crane-manufacturers-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
+      { source: '/crane/eot-crane-company-in-india', destination: '/crane/top-10-eot-crane-manufacturers-in-india', permanent: true },
+
  
  
  // /blogs/* -> /blog/*
