@@ -117,8 +117,9 @@ const nextConfig = {
       r("/overhead-crane-suppliers-in-faridabad", "/crane/eot-crane-manufacturers-in-faridabad"),
 
       // Delhi NCR
-      r("/eot-crane-manufacturer-in-delhi", "/crane/eot-crane-manufacturer-in-delhi-ncr"),
-      r("/eot-crane-company-in-delhi", "/crane/eot-crane-manufacturer-in-delhi-ncr"),
+      r("/eot-crane-manufacturer-in-delhi", "/eot-crane-manufacturer-in-delhi-ncr"),
+      r("/eot-crane-company-in-delhi", "/eot-crane-manufacturer-in-delhi-ncr"),
+      r("/crane/eot-crane-manufacturer-in-delhi-ncr", "/eot-crane-manufacturer-in-delhi-ncr"),
 
       // Ahmedabad
       r("/eot-crane-manufacturers-in-ahmedabad", "/crane-manufacturer-in-ahmedabad"),
