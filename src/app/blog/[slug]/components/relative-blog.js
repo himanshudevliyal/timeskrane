@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+import EnquiryCard from "@/componts/enquiry-card";
 
 export default function RecentPosts({ blogs, className, href }) {
   return (
-    <div
-      className={`rounded-xl bg-white shadow-lg lg:sticky top-6 ${className}`}
-    >
+    <aside className={`lg:sticky top-6 space-y-6 ${className}`}>
+      <EnquiryCard />
+
+      <div className="rounded-xl bg-white shadow-lg">
       <div className="border-b px-5 py-4">
         <h3 className="text-lg font-semibold text-slate-900">Recent Posts</h3>
       </div>
@@ -35,6 +37,7 @@ export default function RecentPosts({ blogs, className, href }) {
           </Link>
         ))}
       </div>
-    </div>
+      </div>
+    </aside>
   );
 }

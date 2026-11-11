@@ -10,7 +10,9 @@ import Image from "next/image";
 import { MdEmail } from "react-icons/md";
 import eotCranesData from "@/app/apis/eot-cranes";
 import { craneCards } from "@/app/kbk-light-crane-system/crads";
-import MobileMenu from "./mobilemenu";
+import dynamic from "next/dynamic";
+// Mobile menu (and framer-motion) loads only when the menu is opened
+const MobileMenu = dynamic(() => import("./mobilemenu"), { ssr: false });
 import GetInTouch from "./getInqarry";
 
 export default function Navbar() {
@@ -275,8 +277,9 @@ export default function Navbar() {
             <div className="flex pl-2 justify-center items-center">
               <Image
                 src="/img/logo.png"
-                width={250}
-                height={200}
+                width={320}
+                height={68}
+                priority
                 alt="Logo"
                 className="ml-7 bg-white rounded-sm transform scale-120"
               />

@@ -3,7 +3,13 @@
 import { useState } from "react";
 import { TbUserSearch } from "react-icons/tb";
 
-export default function GetInTouch() {
+// Default props keep the navbar "Enquire Now" button unchanged; other places
+// (e.g. the sidebar enquiry card) can pass their own label / styling.
+export default function GetInTouch({
+  buttonLabel = "Enquire Now",
+  buttonClassName = "flex items-center bg-[#ffcc00] text-[#003366] px-3 py-1 text-[14px] font-bold",
+  showIcon = true,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -105,9 +111,9 @@ export default function GetInTouch() {
     <div>
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center bg-[#ffcc00] text-[#003366] px-3 py-1 text-[14px] font-bold"
+        className={buttonClassName}
       >
-        <TbUserSearch className="mr-2" /> Enquire Now
+        {showIcon && <TbUserSearch className="mr-2" />} {buttonLabel}
       </button>
 
       {isOpen && (

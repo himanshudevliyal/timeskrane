@@ -58,9 +58,34 @@ const craneOverrides = {
   "double-girder-eot-crane-supplier": DOUBLE_GIRDER_HUB,
 };
 
-const r = (source, destination) => ({ source, destination, permanent: true });
+// Every source also matches a trailing slash ("{/}?"), so /old-url/ goes
+// straight to its final page in ONE hop instead of /old-url/ -> /old-url -> new.
+const withSlash = (source) => `${source}{/}?`;
+const r = (source, destination) => ({ source: withSlash(source), destination, permanent: true });
+// Explicit HTTP 301 (permanent: true sends 308)
+const r301 = (source, destination) => ({ source: withSlash(source), destination, statusCode: 301 });
+
+// GSC "Not found (404)" URLs: prefix-less crane/blog slugs -> real pages
+const gsc404Redirects = [
+  ["/single-girder-vs-double-girder-eot-crane-choice-guide", "/blog/single-girder-vs-double-girder-eot-crane-choice-guide"],
+  ["/eot-crane-manufacturer-in-lucknow", "/crane/eot-crane-manufacturer-in-lucknow"],
+  ["/crane-company-in-india", INDIA_HUB],
+  ["/eot-crane-installation-process-and-cost-in-india", "/blog/eot-crane-installation-process-and-cost-in-india"],
+  ["/eot-crane-vs-gantry-crane-which-one-does-your-factory-actually-need", "/blog/eot-crane-vs-gantry-crane-which-one-does-your-factory-actually-need"],
+  ["/cost-of-10-ton-eot-crane", "/crane/cost-of-10-ton-eot-crane"],
+  ["/2-ton-overhead-crane", "/crane/2-ton-overhead-crane"],
+  ["/electric-chain-hoist-suppliers", "/crane/electric-chain-hoist-suppliers"],
+  ["/how-to-choose-the-right-industrial-crane", "/blog/how-to-choose-the-right-industrial-crane"],
+  ["/tailored-crane-solution-manufacturer", "/crane/tailored-crane-solution-manufacturer"],
+  ["/custom-eot-crane-india", "/crane/custom-eot-crane-india"],
+  ["/about-us", "/about"],
+];
 
 const nextConfig = {
+  // Next's built-in "/x/ -> /x" redirect runs BEFORE our rules and causes
+  // chains. We turn it off and re-add the same rule at the END of redirects().
+  skipTrailingSlashRedirect: true,
+
   images: {
     remotePatterns: [
       // Dev tunnel sirf development me
@@ -81,6 +106,9 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // GSC 404 fixes (HTTP 301)
+      ...gsc404Redirects.map(([from, to]) => r301(from, to)),
+
       // Blog posts: /slug -> /blog/slug
       ...blogSlugs.map((s) => r(`/${s}`, `/blog/${s}`)),
 
@@ -159,6 +187,15 @@ const nextConfig = {
 
       // /blogs/* -> /blog/*
       r("/blogs/:slug", "/blog/:slug"),
+
+      // Generic trailing-slash removal (replaces Next's built-in one).
+      // Must stay LAST so the specific rules above win in a single hop.
+      // Files (anything with an extension) are left alone.
+      {
+        source: "/:path((?:[^/]+/)*[^/.]+)/",
+        destination: "/:path",
+        permanent: true,
+      },
     ];
   },
 };

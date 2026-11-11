@@ -82,8 +82,8 @@ export default function Footer() {
               <Image
                 src="/img/logo.png"
                 alt="logo"
-                width={300}
-                height={100}
+                width={320}
+                height={68}
                 className="bg-white p-2 rounded mb-4"
               />
               <p className="text-sm mb-4">

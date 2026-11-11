@@ -13,9 +13,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Container from "@mui/material/Container";
 
 export const metadata = {
-  title: "KBK Single Girder Suspension Cranes in India | Timeskrane",
+  title: "KBK Double Girder Suspension Cranes in India | Timeskrane",
   description:
-    "Timeskrane provides KBK Double-Girder Suspension Cranes in India. This system ensures smooth movement, increased load capacity, and safe material handling.",
+    "Demag KBK double girder suspension cranes for heavier loads on light crane systems. Ask Timeskrane for specifications and a quotation.",
   keywords: [
     "KBK Double-Girder Suspension Cranes",
     "Cranes in India",
@@ -28,9 +28,9 @@ export const metadata = {
     canonical: "https://www.timeskrane.com/kbk-double-girder-suspension-cranes",
   },
   openGraph: {
-    title: "KBK Double-Girder Suspension Cranes in India | Timeskrane",
+    title: "KBK Double Girder Suspension Cranes in India | Timeskrane",
     description:
-      "High-performance KBK Double-Girder Suspension Cranes designed for higher load capacity and efficient material handling.",
+      "Demag KBK double girder suspension cranes for heavier loads on light crane systems. Ask Timeskrane for specifications and a quotation.",
     url: "https://www.timeskrane.com/kbk-double-girder-suspension-cranes",
     siteName: "Timeskrane",
     locale: "en_IN",

@@ -1,8 +1,13 @@
 import PageSidebar from "@/componts/pageSidebar";
 import "./globals.css";
 import Script from "next/script";
+// Collects MUI/Emotion styles during SSR so server and client HTML match
+// (fixes MUI-related hydration errors in the App Router).
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 
 export const metadata = {
+  // Makes relative canonicals/OG URLs absolute (https://www.timeskrane.com/...)
+  metadataBase: new URL("https://www.timeskrane.com"),
   title: "EOT Crane Manufacturers in India | Timeskrane",
   description:
     "Timeskrane is one of the reliable EOT crane manufacturers in India. They provide safe, long-lasting, and customized lifting solutions for various industries.",
@@ -65,15 +70,17 @@ export default function RootLayout({ children }) {
       </head>
 
       <body suppressHydrationWarning>
-        <PageSidebar />
-        {children}
+        <AppRouterCacheProvider>
+          <PageSidebar />
+          {children}
+        </AppRouterCacheProvider>
 
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-TQ78Z4WX3K"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

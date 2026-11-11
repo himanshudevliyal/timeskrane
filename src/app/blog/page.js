@@ -5,6 +5,15 @@ import Footer from "@/componts/footer";
 import Blogs from "./_components/blog";
 import { Container } from "@mui/material";
 
+export const metadata = {
+  title: "EOT Crane Blog: Guides, Prices and Maintenance | Timeskrane",
+  description:
+    "Read practical guides on EOT crane selection, price, maintenance and safety from Timeskrane engineers.",
+  alternates: {
+    canonical: "https://www.timeskrane.com/blog",
+  },
+};
+
 export default function BlogMainPage() {
   return (
     <>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -12,8 +12,6 @@ export default function SlickSlider() {
   const [mainSlider, setMainSlider] = useState(null);
   const [thumbnailSlider, setThumbnailSlider] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const progressInterval = useRef(null);
 
   const slides = [
     {
@@ -70,24 +68,25 @@ export default function SlickSlider() {
     },
   ];
 
+  // Render a static first slide on the server / first paint; switch to the
+  // carousel after hydration. This lets the LCP image load immediately with
+  // high priority and avoids the layout shift slick causes while initialising.
+  // Show the static first slide until its image has loaded and been on screen
+  // for one autoplay interval, then hand over to the carousel. The static
+  // image is what gets painted first (and measured as LCP); visually nothing
+  // changes because slide 1 would be showing for those 3s anyway.
+  const [sliderReady, setSliderReady] = useState(false);
+  const [firstImageLoaded, setFirstImageLoaded] = useState(false);
   useEffect(() => {
-    setProgress(0);
-
-    if (progressInterval.current) {
-      clearInterval(progressInterval.current);
-    }
-
-    progressInterval.current = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) return 0;
-        return prev + (100 / 3000) * 16.67; // 60fps
-      });
-    }, 16.67);
-
-    return () => {
-      if (progressInterval.current) clearInterval(progressInterval.current);
-    };
-  }, [currentSlide]);
+    // safety net in case onLoad never fires
+    const fallback = setTimeout(() => setSliderReady(true), 8000);
+    return () => clearTimeout(fallback);
+  }, []);
+  useEffect(() => {
+    if (!firstImageLoaded) return;
+    const timer = setTimeout(() => setSliderReady(true), 3000);
+    return () => clearTimeout(timer);
+  }, [firstImageLoaded]);
 
   const mainSettings = {
     dots: false,
@@ -97,8 +96,41 @@ export default function SlickSlider() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
+    // only load a slide's image when it is about to be shown
+    lazyLoad: "ondemand",
     beforeChange: (_, next) => setCurrentSlide(next),
   };
+
+  const renderSlide = (slide, isFirst, onLoad) => (
+    <div key={slide.id} className="relative h-[80vh] ">
+      <Image
+        src={slide.image || "/placeholder.svg"}
+        alt={slide.title}
+        fill
+        sizes="100vw"
+        className="object-cover h-100"
+        priority={isFirst}
+        fetchPriority={isFirst ? "high" : "auto"}
+        loading={isFirst ? "eager" : "lazy"}
+        onLoad={onLoad}
+      />
+      <div className="contaneir">
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute top-30 left-0 p-8 text-white z-10 max-w-md">
+          <h2 className="text-2xl lg:text-6xl font-bold"> {slide.title}</h2>
+          <p className="text-2xl mt-2">{slide.subtitle}</p>
+          <a href="#products" className="flex rounded-sm mt-4 items-center  btn">
+            <span className="shadow-lg items-center  bg-blue-700 hover:bg-blue-800 text-white font-bold  px-4 py-2 ">
+              <span className="flex-1 text-center mr-2">View All Products</span>
+            </span>
+            <span className="bg-blue-500  shadow-lg py-2 px-2  ">
+              <FiChevronRight className=" text-white  text-2xl  font-bold" />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 
   const thumbnailSettings = {
     dots: false,
@@ -117,47 +149,18 @@ export default function SlickSlider() {
       <div className="relative w-full h-[80vh] overflow-hidden">
         {/* Main Slider */}
         <div className="h-full">
-          <Slider
-            {...mainSettings}
-            ref={(slider) => setMainSlider(slider)}
-            asNavFor={thumbnailSlider || undefined}
-            className="h-[80vh]"
-          >
-            {slides.map((slide) => (
-              <div key={slide.id} className="relative h-[80vh] ">
-                <Image
-                  src={slide.image || "/placeholder.svg"}
-                  alt={slide.title}
-                  fill
-                  className="object-cover h-100"
-                  priority
-                />
-                <div className="contaneir">
-                  <div className="absolute inset-0 bg-black/40" />
-                  <div className="absolute top-30 left-0 p-8 text-white z-10 max-w-md">
-                    <h2 className="text-2xl lg:text-6xl font-bold">
-                      {" "}
-                      {slide.title}
-                    </h2>
-                    <p className="text-2xl mt-2">{slide.subtitle}</p>
-                    <a
-                      href="#products"
-                      className="flex rounded-sm mt-4 items-center  btn"
-                    >
-                      <span className="shadow-lg items-center  bg-blue-700 hover:bg-blue-800 text-white font-bold  px-4 py-2 ">
-                        <span className="flex-1 text-center mr-2">
-                          View All Products
-                        </span>
-                      </span>
-                      <span className="bg-blue-500  shadow-lg py-2 px-2  ">
-                        <FiChevronRight className=" text-white  text-2xl  font-bold" />
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Slider>
+          {sliderReady ? (
+            <Slider
+              {...mainSettings}
+              ref={(slider) => setMainSlider(slider)}
+              asNavFor={thumbnailSlider || undefined}
+              className="h-[80vh]"
+            >
+              {slides.map((slide, idx) => renderSlide(slide, idx === 0))}
+            </Slider>
+          ) : (
+            renderSlide(slides[0], true, () => setFirstImageLoaded(true))
+          )}
         </div>
 
         {/* Progress Bar */}

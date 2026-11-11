@@ -41,11 +41,11 @@ export default function About() {
           <div className="col-span-12 md:col-span-5">
             <Image
               src="/img/about.jpg"
-              layout="responsive"
-              width={100}
-              height={100}
+              width={1338}
+              height={991}
+              sizes="(min-width: 768px) 40vw, 100vw"
               alt="about "
-              className="w-100 rounded-lg shadow-lg"
+              className="w-full h-auto rounded-lg shadow-lg"
             ></Image>
           </div>
         </div>

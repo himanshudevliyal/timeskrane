@@ -6,7 +6,7 @@ import BlogTOC from "../blog/[slug]/components/BlogTOC.js";
 import BlogFAQ from "../blog/[slug]/components/BlogFAQ.js"; // FAQ accordion component
 
 import axios from "axios";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import {
   extractHeadings,
@@ -52,6 +52,27 @@ const getBlog = async (slug) => {
   }
 };
 
+// If a crane page or blog post is requested without its prefix (/slug),
+// find where it actually lives so we can 301 to /crane/slug or /blog/slug
+// instead of returning a 404.
+const findPrefixedPath = async (slug) => {
+  const sources = [
+    { endpoint: "product-pages", prefix: "/crane/" },
+    { endpoint: "blogs", prefix: "/blog/" },
+  ];
+  for (const { endpoint, prefix } of sources) {
+    try {
+      const { data } = await axios.get(
+        `${baseUrl}/${endpoint}/get-by-slug/${slug}`
+      );
+      if (data?.data?.slug) return `${prefix}${data.data.slug}`;
+    } catch {
+      // not found in this source, try the next one
+    }
+  }
+  return null;
+};
+
 // Generate page metadata from blog data
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -85,8 +106,12 @@ export default async function BlogPage({ params }) {
   const { slug } = await params;
   const blog = await getBlog(slug);
 
-  // Trigger Next.js not-found page if blog doesn't exist
-  if (!blog) notFound();
+  // Not a city page: redirect to /crane/ or /blog/ if it exists there, else 404
+  if (!blog) {
+    const target = await findPrefixedPath(slug);
+    if (target) permanentRedirect(target);
+    notFound();
+  }
 
   const recentBlogs = await getRecentBlogs(slug);
 

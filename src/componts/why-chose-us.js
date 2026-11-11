@@ -13,10 +13,10 @@ const OilGasSection = () => {
           {/* Left Side - Image Section */}
           <div className="col-span-12 md:col-span-5 relative">
             <Image
-              width={300}
-              height={300}
-              layout="responsive"
-              src="/img/whychoose.jpg" // Replace with your actual image path
+              width={4928}
+              height={3264}
+              sizes="(min-width: 768px) 40vw, 100vw"
+              src="/img/whychoose.jpg"
               alt="Industry Tour"
               className="w-full rounded-lg shadow-md h-full object-cover"
             />

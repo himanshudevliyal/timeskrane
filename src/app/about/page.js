@@ -7,9 +7,9 @@ import Footer from "@/componts/footer";
 import Image from "next/image";
 import CertificateImageGallery from "./_componts/certificates";
 export const metadata = {
-  title: "About Timeskrane | Industrial Crane Experts Since 1988",
+  title: "About Timeskrane | EOT Crane Manufacturer in India",
   description:
-    "Timeskrane has been a trusted industrial crane expert since 1988, offering EOT cranes, hoists, and reliable lifting solutions across India.",
+    "Know Timeskrane: our engineering team, manufacturing capability and the industries we serve with EOT cranes and hoists.",
 
   keywords: [
     "hoist crane",
@@ -28,7 +28,7 @@ export const metadata = {
   ],
 
   alternates: {
-    canonical: "/about",
+    canonical: "https://www.timeskrane.com/about",
   },
 };
 

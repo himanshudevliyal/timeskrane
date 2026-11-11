@@ -9,6 +9,16 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Container from "@mui/material/Container";
+
+export const metadata = {
+  title: "KBK Portal Cranes in India | Timeskrane",
+  description:
+    "KBK portal cranes that serve open areas without building columns. Get specifications and a quotation from Timeskrane.",
+  alternates: {
+    canonical: "https://www.timeskrane.com/kbk-portal-cranes",
+  },
+};
+
 export default function KbkSuspension() {
   return (
     <>

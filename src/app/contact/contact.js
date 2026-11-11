@@ -23,11 +23,20 @@ const ContactForm = () => {
   const [captchaToken, setCaptchaToken] = useState(null);
   const [captchaError, setCaptchaError] = useState("");
 
+  const REQUIRED_FIELDS = [
+    "firstName",
+    "lastName",
+    "company",
+    "townCity",
+    "telephone",
+    "email",
+  ];
+
   const validateField = (name, value) => {
     if (name === "termsAccepted" && !value) {
       return "You must accept the terms and conditions.";
     }
-    if (!value) {
+    if (REQUIRED_FIELDS.includes(name) && !String(value).trim()) {
       return "This field is required.";
     }
     if (name === "email" && !/^\S+@\S+\.\S+$/.test(value)) {
@@ -143,7 +152,9 @@ const ContactForm = () => {
                   >
                     {field.charAt(0).toUpperCase() +
                       field.slice(1).replace(/([A-Z])/g, " $1")}{" "}
-                    <span className="text-red-500">*</span>
+                    {REQUIRED_FIELDS.includes(field) && (
+                      <span className="text-red-500">*</span>
+                    )}
                   </label>
                   <input
                     type={

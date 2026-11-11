@@ -78,7 +78,7 @@ export default async function BlogPage({ params }) {
         items={[
           {
             label: blog.title,
-            href: `/${blog.slug}`,
+            href: `/blog/${blog.slug}`,
             isCurrent: true,
           },
         ]}

@@ -9,6 +9,16 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Container from "@mui/material/Container";
+
+export const metadata = {
+  title: "KBK Stacker Cranes in India | Timeskrane",
+  description:
+    "KBK stacker cranes for stores and production lines, supplied and supported by Timeskrane across India.",
+  alternates: {
+    canonical: "https://www.timeskrane.com/kbk-stacker-cranes",
+  },
+};
+
 export default function KbkSuspension() {
   return (
     <>

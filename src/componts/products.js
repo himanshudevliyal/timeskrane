@@ -67,8 +67,8 @@ export default function Products() {
                       src={product.imagePath || "/placeholder.svg"}
                       alt={product.title}
                       fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
                       className="object-cover brightness-75 group-hover:brightness-100 transition-all duration-300"
-                      priority
                     />
                   </div>
 
