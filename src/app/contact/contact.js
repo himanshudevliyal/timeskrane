@@ -6,11 +6,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     company: "",
-    street: "",
-    zipCode: "",
     townCity: "",
     email: "",
     telephone: "",
@@ -24,8 +21,7 @@ const ContactForm = () => {
   const [captchaError, setCaptchaError] = useState("");
 
   const REQUIRED_FIELDS = [
-    "firstName",
-    "lastName",
+    "fullName",
     "company",
     "townCity",
     "telephone",
@@ -97,11 +93,8 @@ const ContactForm = () => {
 
   const resetForm = () => {
     setFormData({
-      firstName: "",
-      lastName: "",
+      fullName: "",
       company: "",
-      street: "",
-      zipCode: "",
       townCity: "",
       email: "",
       telephone: "",
@@ -135,11 +128,8 @@ const ContactForm = () => {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                "firstName",
-                "lastName",
+                "fullName",
                 "company",
-                "street",
-                "zipCode",
                 "townCity",
                 "email",
                 "telephone",

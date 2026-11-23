@@ -5,11 +5,8 @@ export async function POST(request) {
     const data = await request.json();
 
     const {
-      firstName,
-      lastName,
+      fullName,
       company,
-      street,
-      zipCode,
       townCity,
       email,
       telephone,
@@ -66,34 +63,19 @@ export async function POST(request) {
     await transporter.sendMail({
       from: `"Website Form" <${process.env.EMAIL_USERNAME}>`,
       to: process.env.EMAIL_USERNAME,
-      subject: `New Contact Form Submission from ${firstName} ${lastName}`,
+      subject: `New Contact Form Submission from ${fullName}`,
       html: `
         <h2>New Contact Form Submission</h2>
 
         <table border="1" cellpadding="10" cellspacing="0">
           <tr>
-            <td><strong>First Name</strong></td>
-            <td>${firstName}</td>
-          </tr>
-
-          <tr>
-            <td><strong>Last Name</strong></td>
-            <td>${lastName}</td>
+            <td><strong>Full Name</strong></td>
+            <td>${fullName}</td>
           </tr>
 
           <tr>
             <td><strong>Company</strong></td>
             <td>${company}</td>
-          </tr>
-
-          <tr>
-            <td><strong>Street</strong></td>
-            <td>${street}</td>
-          </tr>
-
-          <tr>
-            <td><strong>ZIP Code</strong></td>
-            <td>${zipCode}</td>
           </tr>
 
           <tr>
