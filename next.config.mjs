@@ -70,6 +70,7 @@ const gsc404Redirects = [
   ["/single-girder-vs-double-girder-eot-crane-choice-guide", "/blog/single-girder-vs-double-girder-eot-crane-choice-guide"],
   ["/eot-crane-manufacturer-in-lucknow", "/crane/eot-crane-manufacturer-in-lucknow"],
   ["/crane-company-in-india", INDIA_HUB],
+  ["/crane-suppliers-in-india", INDIA_HUB],
   ["/eot-crane-installation-process-and-cost-in-india", "/blog/eot-crane-installation-process-and-cost-in-india"],
   ["/eot-crane-vs-gantry-crane-which-one-does-your-factory-actually-need", "/blog/eot-crane-vs-gantry-crane-which-one-does-your-factory-actually-need"],
   ["/cost-of-10-ton-eot-crane", "/crane/cost-of-10-ton-eot-crane"],
